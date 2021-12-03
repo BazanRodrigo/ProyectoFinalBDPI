@@ -1,0 +1,76 @@
+use CEPBus
+insert into Conductor values('Gerardo', 'Lopez Hernandez', 'bazr010114hplzrda1', 20, 'Hombre')
+insert into Camion values('ABC134', '2021-10-03 19:54:14', 'Mercedes k54', '2021-10-03 20:00:00',
+                          50, 5)
+insert into Viaje values('Tecamachalco', 'Puebla', 37, 'abc134')
+insert into Cliente values('Rodrigo basan', 21)
+insert into InfoViaje values(1, 5)
+DELETE FROM Conductor WHERE Nombre = 'Gerardo'
+DELETE FROM Cliente WHERE Nombre = 'Rodrigo basan'
+
+update Viaje set Destino = 'Tlaxcala' where Destino = 'Tecamachalco'
+
+select * from Conductor
+select * from Camion
+select * from Viaje
+select * from Cliente
+select * from InfoViaje
+--Creando base de datos
+create database CEPBus
+go
+--Iniciamos a usarla
+use CEPBus
+go
+--Creamos tabla de datos cliente
+create table dbo.Cliente
+(Id_Cliente int identity(1,1) primary key not null,
+Nombre nvarchar(64) not null,
+Edad int not null
+)
+go
+--Creamos tabla de datos InfoViaje
+create table dbo.InfoViaje
+(Id_boleto int identity(1,1) primary key not null,
+Id_Cliente int not null,
+Id_viaje int not null
+)
+go
+--Creamos tabla de datos Viaje
+create table dbo.Viaje
+(Id_viaje int identity(1,1) primary key not null,
+Origen nvarchar(32) not null,
+Destino nvarchar(32) not null,
+LugaresDisponibles int not null,
+HoraAbordaje datetime not null,
+HoraSalida datetime not null,
+id_conductor int
+)
+go
+--Cramos tabla de datos Camion
+create table dbo.Camion
+(Placas nvarchar(8) primary key not null,
+Modelo nvarchar(16) not null,
+Capacidad int not null,
+)
+go
+--Creamos tabla de datos Conductor
+create table dbo.Conductor
+(id_conductor int identity(1,1) primary key not null,
+Nombre nvarchar(32) not null,
+Apellidos nvarchar(32) not null,
+CURP nvarchar(32) not null,
+Edad int not null,
+Sexo nvarchar(8) not null,
+Placas nvarchar(8) not null
+)
+Go
+
+SELECT *
+FROM Conductor
+JOIN Camion
+ON Conductor.Placas = Camion.Placas
+
+update Viaje set Destino = 'Tlaxcala' where Destino = 'Tecamachalco'
+
+DELETE FROM Conductor WHERE Nombre = 'Gerardo'
+DELETE FROM Cliente WHERE Nombre = 'Rodrigo basan'
